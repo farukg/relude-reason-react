@@ -8,11 +8,11 @@
       "dir": "src",
       "subdirs": true
     },
-    {
-      "dir": "__tests__",
-      "subdirs": true,
-      "type": "dev"
-    },
+//    {
+//      "dir": "__tests__",
+//      "subdirs": true,
+//      "type": "dev"
+//    },
     {
       "dir": "examples",
       "subdirs": true,
@@ -28,12 +28,13 @@
   "suffix": ".bs.js",
   "namespace": false,
   "bs-dependencies": [
-    "reason-react",
+    "@rescript/react",
     "relude"
   ],
   "bs-dev-dependencies": [
     "@glennsl/bs-jest",
-    "bs-react-testing-library"
+    "rescript-react-testing-library",
+    "rescript-dom-testing-library"
   ],
   "warnings": {
     "error": "+a"

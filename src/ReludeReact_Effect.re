@@ -24,11 +24,11 @@ let useEffect1WithEq: 'a. (unit => unit, ('a, 'a) => bool, 'a) => unit =
 
     React.useEffect1(
       () => {
-        switch (React.Ref.current(refa)) {
+        switch (refa.current) {
         | Some(old) when eq(old, a) => ()
         | None
         | Some(_) =>
-          React.Ref.setCurrent(refa, Some(a));
+          refa.current = Some(a);
           f();
         };
         None;
@@ -52,11 +52,11 @@ let useEffect2WithEq:
 
     React.useEffect2(
       () => {
-        switch (React.Ref.current(refa), React.Ref.current(refb)) {
+        switch (refa.current, refb.current) {
         | (Some(olda), Some(oldb)) when eqa(olda, a) && eqb(oldb, b) => ()
         | _ =>
-          React.Ref.setCurrent(refa, Some(a));
-          React.Ref.setCurrent(refb, Some(b));
+          refa.current = Some(a);
+          refb.current = Some(b);
           f();
         };
         None;
@@ -87,18 +87,14 @@ let useEffect3WithEq:
 
     React.useEffect3(
       () => {
-        switch (
-          React.Ref.current(refa),
-          React.Ref.current(refb),
-          React.Ref.current(refc),
-        ) {
+        switch (refa.current, refb.current, refc.current) {
         | (Some(olda), Some(oldb), Some(oldc))
             when eqa(olda, a) && eqb(oldb, b) && eqc(oldc, c) =>
           ()
         | _ =>
-          React.Ref.setCurrent(refa, Some(a));
-          React.Ref.setCurrent(refb, Some(b));
-          React.Ref.setCurrent(refc, Some(c));
+          refa.current = Some(a);
+          refb.current = Some(b);
+          refc.current = Some(c);
           f();
         };
         None;
@@ -131,21 +127,16 @@ let useEffect4WithEq:
 
     React.useEffect4(
       () => {
-        switch (
-          React.Ref.current(refa),
-          React.Ref.current(refb),
-          React.Ref.current(refc),
-          React.Ref.current(refd),
-        ) {
+        switch (refa.current, refb.current, refc.current, refd.current) {
         | (Some(olda), Some(oldb), Some(oldc), Some(oldd))
             when
               eqa(olda, a) && eqb(oldb, b) && eqc(oldc, c) && eqd(oldd, d) =>
           ()
         | _ =>
-          React.Ref.setCurrent(refa, Some(a));
-          React.Ref.setCurrent(refb, Some(b));
-          React.Ref.setCurrent(refc, Some(c));
-          React.Ref.setCurrent(refd, Some(d));
+          refa.current = Some(a);
+          refb.current = Some(b);
+          refc.current = Some(c);
+          refd.current = Some(d);
           f();
         };
         None;
@@ -181,11 +172,11 @@ let useEffect5WithEq:
     React.useEffect5(
       () => {
         switch (
-          React.Ref.current(refa),
-          React.Ref.current(refb),
-          React.Ref.current(refc),
-          React.Ref.current(refd),
-          React.Ref.current(refe),
+          refa.current,
+          refb.current,
+          refc.current,
+          refd.current,
+          refe.current,
         ) {
         | (Some(olda), Some(oldb), Some(oldc), Some(oldd), Some(olde))
             when
@@ -196,11 +187,11 @@ let useEffect5WithEq:
               && eqe(olde, e) =>
           ()
         | _ =>
-          React.Ref.setCurrent(refa, Some(a));
-          React.Ref.setCurrent(refb, Some(b));
-          React.Ref.setCurrent(refc, Some(c));
-          React.Ref.setCurrent(refd, Some(d));
-          React.Ref.setCurrent(refe, Some(e));
+          refa.current = Some(a);
+          refb.current = Some(b);
+          refc.current = Some(c);
+          refd.current = Some(d);
+          refe.current = Some(e);
           f();
         };
         None;
@@ -321,9 +312,9 @@ module UseAsyncResult = {
               UpdateWithIO(
                 state
                 |> Relude.AsyncResult.foldByValue(
-                    Relude.AsyncResult.init,
-                    Relude.AsyncResult.reloadingOk,
-                    Relude.AsyncResult.reloadingError,
+                     Relude.AsyncResult.init,
+                     Relude.AsyncResult.reloadingOk,
+                     Relude.AsyncResult.reloadingError,
                    ),
                 {
                   Relude.IO.bimap(

@@ -50,7 +50,7 @@ describe("ReludeReact_Reducer", () => {
       let renderResult = render(<Counter />);
       renderResult
       |> getByText(~matcher=`Str("Increment"), ~options=?None)
-      |> FireEvent.click(~eventInit=?None);
+      |> click(~eventInit=?None);
       expect(Counter.clickCount^) |> toEqual(2);
     },
   )

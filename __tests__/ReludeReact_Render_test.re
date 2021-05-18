@@ -1,4 +1,6 @@
 open Jest;
+open JestDom;
+open DomTestingLibrary;
 open Expect;
 
 describe("ReludeReact_Render", () => {

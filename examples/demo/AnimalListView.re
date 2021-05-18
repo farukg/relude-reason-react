@@ -38,7 +38,7 @@ let reducer =
   | FetchAnimalsError(error) =>
     Update({...state, animalsResult: AsyncResult.completeError(error)})
 
-  | ViewCreateForm => SideEffect(_ => ReasonReactRouter.push("/create"))
+  | ViewCreateForm => SideEffect(_ => RescriptReactRouter.push("/create"))
 
   | ViewAnimal(_animal) => NoUpdate
 
